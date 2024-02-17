@@ -1,0 +1,6 @@
+# ninja log v5
+4	2344	1705421251493517176	CMakeFiles/BigramsTrigrams_Parallel.dir/main.cpp.o	45d4677c4e66af9c
+2	3136	1705418694337423885	CMakeFiles/BigramsTrigrams_Parallel.dir/WordNgrams.cpp.o	f2c5c60ed0f2bc91
+2345	2434	1705421251593298361	BigramsTrigrams_Parallel	2c211635e45384d0
+5	2541	1708105896537928215	CMakeFiles/BigramsTrigrams_Parallel.dir/main.cpp.o	45d4677c4e66af9c
+2541	2742	1708105896758983624	BigramsTrigrams_Parallel	2c211635e45384d0

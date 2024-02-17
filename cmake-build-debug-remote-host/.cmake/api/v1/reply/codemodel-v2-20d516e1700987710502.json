@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.22.1"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "BigramsTrigrams_Parallel",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "BigramsTrigrams_Parallel::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-BigramsTrigrams_Parallel-Debug-7dafb5736aa3d9ef7832.json",
+					"name" : "BigramsTrigrams_Parallel",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/data01/pc24giamag/tmp/tmp/tmp.byIXsKoXiy/cmake-build-debug-remote-host",
+		"source" : "/data01/pc24giamag/tmp/tmp/tmp.byIXsKoXiy"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

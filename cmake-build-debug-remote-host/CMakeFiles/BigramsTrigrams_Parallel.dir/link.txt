@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/BigramsTrigrams_Parallel.dir/main.cpp.o CMakeFiles/BigramsTrigrams_Parallel.dir/WordNgrams.cpp.o -o BigramsTrigrams_Parallel 
