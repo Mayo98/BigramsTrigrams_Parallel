@@ -16,32 +16,33 @@ using namespace std;
 int WordNgrams::getNgramLength() const {
     return NgramLength;
 }
-void print_histogram(unordered_map<string, int> histogram) {
+void printHistogram(unordered_map<string, int> histogram) {
     string ngram;
     int count;
 
-    //sort the histogram
+    //ordino l'istogramma in ordine decrescente
+
     priority_queue<pair<int, string>> q;
     for (auto& [ngram, count]: histogram) {
         q.push({count, ngram});
     }
 
-    // prinit the most common ngrams
+    // stampo le parole più numerose
     for (int i = 0; i < 3; i++) {
         auto [count, ngram] = q.top();
         q.pop();
         cout << ngram << ": " << count << endl;
     }
 }
-void WordNgrams::run_word_ngrams(const string& filename) {
+void WordNgrams::runWordNgrams(const string& filename) {
 
-    cout << "Computing word ngrams..." << endl;
+    cout << "Calcolo n-grammi di parole..." << endl;
     int n = this->NgramLength;
     unordered_map<string, int> histogram;
 
     ifstream file(filename);
     if (!file) {
-        cout << "Error opening input txt file" << endl;
+        cout << "Errore nell'apertura file di input" << endl;
         return;
     }
 
@@ -49,21 +50,21 @@ void WordNgrams::run_word_ngrams(const string& filename) {
     int num_words = 0;
     string word;
     while (file >> word) {
-        if (num_words >= n - 1) {   // control for handling the first words of the txt file
+        if (num_words >= n - 1) {   // controllo se ho raggiunto la lunghezza giusta per formare n-gramma
             string ngram = "";
             for (int i = 0; i < n - 1; i++) {
-                ngram += previous_words[i] + " ";
+                ngram += previous_words[i] + " ";           //riempio stringa con l'n-1 - gramma
             }
-            ngram += word;
+            ngram += word;                                  //aggiungo word attuale e completo n-gramma
             histogram[ngram]++;
         }
-        for (int i = 0; i < n - 2; i++) {           // used when n >=3
+        for (int i = 0; i < n - 2; i++) {           // ciclo per spostare (destra a sinistra) le parole precedenti via via
             previous_words[i] = previous_words[i + 1];
         }
-        previous_words[n - 2] = word;   // access the last element of previous_words vector (of length n-1)
-        num_words++;
+        previous_words[n - 2] = word;   // salvo word attuale in posizione n-2 (in coda)
+        num_words++;                    //incremento contatore n-gramma
     }
 
-    print_histogram(histogram);
+    printHistogram(histogram);
 }
 

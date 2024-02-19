@@ -7,7 +7,7 @@
 #include <functional>
 #include <fstream>
 #include "WordNgrams.h"
-//#include "CharacterNgrams.h"
+#include "CharacterNgrams.h"
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -40,25 +40,25 @@ std::map<std::string, int> computeTrigramHistogram(const std::string& text) {
 }
 
 int clean_txt() {
-    // This function removes punctuation and transforms every character to lowercase
+
+    // Funzione per rimuovere punteggiatura e portare testo in minuscolo
     string filename = "./input.txt";
     ifstream input(filename);
-
     if (!input.is_open()) {
-        std::cout << "Current path is " << std::filesystem::current_path() << '\n'; // (1)
-        cout << "Error opening input file" << endl;
+        //std::cout << "Current path is " << std::filesystem::current_path() << '\n'; // (1)
+        cout << "Impossibile aprire il file o input non valido." << endl;
         return 1;
     }
     string word;
     ofstream output("../clean_input.txt");
     if (!output.is_open()) {
-        cout << "Error opening output file" << endl;
+        cout << "Errore nell'apertura file di output" << endl;
         return 1;
     }
     while (input >> word) {
         string clean_word;
         for (char c: word) {
-            if (!ispunct(c)) {
+            if (!ispunct(c) && std::isalnum(c)) {  //true e carattere è un segno di punteggiatura
                 clean_word += tolower(c);
             }
         }
@@ -90,8 +90,12 @@ int main() {
     for (const auto& pair : trigramHistogram) {
         std::cout << pair.first << ": " << pair.second << std::endl;
     }
+
+
     clean_txt();
     WordNgrams w(3);
-    w.run_word_ngrams("../clean_input.txt");
+    w.runWordNgrams("../clean_input.txt");
+    CharacterNgrams c(3);
+    c.runCharacterNgrams("../clean_input.txt");
     return 0;
 }

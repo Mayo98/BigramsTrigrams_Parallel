@@ -9,19 +9,21 @@
 using namespace std;
 
 class WordNgrams {
+private:
+    int NgramLength;
+
 public:
     WordNgrams(int n) {
         NgramLength = n;
     };
 
-    void run_word_ngrams(const string &filename);
+    void runWordNgrams(const string &filename);
 
-    void run_word_ngrams_parallel(const string &filename);
+    void runWordNgrams_parallel(const string &filename);
 
     int getNgramLength() const;
 
-private:
-    int NgramLength;
+
 
 
 };
