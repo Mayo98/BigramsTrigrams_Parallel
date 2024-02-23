@@ -1,1 +1,4 @@
-Failed to launch CMake executable '/usr/bin/cmake': Connect timed out Configure Disable profile
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /data01/pc24giamag/tmp/tmp/tmp.byIXsKoXiy -B /data01/pc24giamag/tmp/tmp/tmp.byIXsKoXiy/cmake-build-debug-remote-host
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /data01/pc24giamag/tmp/tmp/tmp.byIXsKoXiy/cmake-build-debug-remote-host

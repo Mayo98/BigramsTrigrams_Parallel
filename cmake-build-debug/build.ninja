@@ -51,19 +51,22 @@ build cmake_object_order_depends_target_BigramsTrigrams_Parallel: phony || CMake
 
 build CMakeFiles/BigramsTrigrams_Parallel.dir/main.cpp.o: CXX_COMPILER__BigramsTrigrams_Parallel_unscanned_Debug /Users/giacomomagistrato/CLionProjects/BigramsTrigrams_Parallel/main.cpp || cmake_object_order_depends_target_BigramsTrigrams_Parallel
   DEP_FILE = CMakeFiles/BigramsTrigrams_Parallel.dir/main.cpp.o.d
-  FLAGS = -g -std=gnu++17 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -fcolor-diagnostics
+  FLAGS = -Xpreprocessor -fopenmp -lomp -g -std=gnu++17 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -fcolor-diagnostics
+  INCLUDES = -I/usr/local/opt/libomp/include
   OBJECT_DIR = CMakeFiles/BigramsTrigrams_Parallel.dir
   OBJECT_FILE_DIR = CMakeFiles/BigramsTrigrams_Parallel.dir
 
 build CMakeFiles/BigramsTrigrams_Parallel.dir/WordNgrams.cpp.o: CXX_COMPILER__BigramsTrigrams_Parallel_unscanned_Debug /Users/giacomomagistrato/CLionProjects/BigramsTrigrams_Parallel/WordNgrams.cpp || cmake_object_order_depends_target_BigramsTrigrams_Parallel
   DEP_FILE = CMakeFiles/BigramsTrigrams_Parallel.dir/WordNgrams.cpp.o.d
-  FLAGS = -g -std=gnu++17 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -fcolor-diagnostics
+  FLAGS = -Xpreprocessor -fopenmp -lomp -g -std=gnu++17 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -fcolor-diagnostics
+  INCLUDES = -I/usr/local/opt/libomp/include
   OBJECT_DIR = CMakeFiles/BigramsTrigrams_Parallel.dir
   OBJECT_FILE_DIR = CMakeFiles/BigramsTrigrams_Parallel.dir
 
 build CMakeFiles/BigramsTrigrams_Parallel.dir/CharacterNgrams.cpp.o: CXX_COMPILER__BigramsTrigrams_Parallel_unscanned_Debug /Users/giacomomagistrato/CLionProjects/BigramsTrigrams_Parallel/CharacterNgrams.cpp || cmake_object_order_depends_target_BigramsTrigrams_Parallel
   DEP_FILE = CMakeFiles/BigramsTrigrams_Parallel.dir/CharacterNgrams.cpp.o.d
-  FLAGS = -g -std=gnu++17 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -fcolor-diagnostics
+  FLAGS = -Xpreprocessor -fopenmp -lomp -g -std=gnu++17 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk -fcolor-diagnostics
+  INCLUDES = -I/usr/local/opt/libomp/include
   OBJECT_DIR = CMakeFiles/BigramsTrigrams_Parallel.dir
   OBJECT_FILE_DIR = CMakeFiles/BigramsTrigrams_Parallel.dir
 
@@ -76,7 +79,9 @@ build CMakeFiles/BigramsTrigrams_Parallel.dir/CharacterNgrams.cpp.o: CXX_COMPILE
 # Link the executable BigramsTrigrams_Parallel
 
 build BigramsTrigrams_Parallel: CXX_EXECUTABLE_LINKER__BigramsTrigrams_Parallel_Debug CMakeFiles/BigramsTrigrams_Parallel.dir/main.cpp.o CMakeFiles/BigramsTrigrams_Parallel.dir/WordNgrams.cpp.o CMakeFiles/BigramsTrigrams_Parallel.dir/CharacterNgrams.cpp.o
-  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk
+  FLAGS = -Xpreprocessor -fopenmp -lomp -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.3.sdk
+  LINK_FLAGS = -lomp
+  LINK_PATH = -L/usr/local/opt/libomp/lib
   OBJECT_DIR = CMakeFiles/BigramsTrigrams_Parallel.dir
   POST_BUILD = :
   PRE_LINK = :

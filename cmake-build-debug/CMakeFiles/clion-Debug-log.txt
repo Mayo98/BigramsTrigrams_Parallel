@@ -1,4 +1,4 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/giacomomagistrato/CLionProjects/BigramsTrigrams_Parallel -B /Users/giacomomagistrato/CLionProjects/BigramsTrigrams_Parallel/cmake-build-debug
--- Configuring done (0.3s)
+-- Configuring done (0.2s)
 -- Generating done (0.0s)
 -- Build files have been written to: /Users/giacomomagistrato/CLionProjects/BigramsTrigrams_Parallel/cmake-build-debug

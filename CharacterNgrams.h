@@ -23,7 +23,7 @@ public:
 
     void runCharacterNgrams(const string &filename);
 
-    void parallel_compute_character_ngrams(const string &filename);
+    void runCharacterNgrams_parallel(const string &filename);
 
     vector<string> extractNgramsFromWord(const string& str);
 

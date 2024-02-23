@@ -14,30 +14,10 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include <filesystem>
+
 #include <locale>
 
 using namespace std;
-
-std::map<std::string, int> computeTrigramHistogram(const std::string& text) {
-    std::map<std::string, int> histogram;
-    std::locale loc("it_IT.UTF-8");
-
-    for (size_t i = 1; i < text.length() - 1; ++i) {
-        std::string currentTrigram = text.substr(i - 1, 3);
-
-        if (isalpha(currentTrigram[0], loc) &&
-            isalpha(currentTrigram[1], loc) &&
-            isalpha(currentTrigram[2], loc)) {
-            currentTrigram[0] = tolower(currentTrigram[0], loc);
-            currentTrigram[1] = tolower(currentTrigram[1], loc);
-            currentTrigram[2] = tolower(currentTrigram[2], loc);
-            histogram[currentTrigram]++;
-        }
-    }
-
-    return histogram;
-}
 
 int clean_txt() {
 
@@ -55,47 +35,128 @@ int clean_txt() {
         cout << "Errore nell'apertura file di output" << endl;
         return 1;
     }
+    int count;
     while (input >> word) {
-        string clean_word;
-        for (char c: word) {
-            if (!ispunct(c) && std::isalnum(c)) {  //true e carattere è un segno di punteggiatura
-                clean_word += tolower(c);
+
+
+            string clean_word;
+            for (char c: word) {
+                if (!ispunct(c) && std::isalnum(c)) {  //true e carattere è un segno di punteggiatura
+                    clean_word += tolower(c);
+                }
+            }
+            if (!clean_word.empty()) {
+                output << clean_word << " ";
             }
         }
-        if (!clean_word.empty()) {
-            output << clean_word << " ";
-        }
-    }
+
     input.close();
     output.close();
     return 0;
 }
 
+double averageWSequentialExecutions(int n, std::string path) {
+    int num_test = 2;
+    double mediaS;
+    WordNgrams w(n);
+    double sum;
+    for (int i = 0; i < num_test; i++) {
+        auto startS = std::chrono::steady_clock::now();
+        w.runWordNgrams(path);
+        //w.runWordNgrams_parallel2(path);
+        auto endS = std::chrono::steady_clock::now();
+        auto durationS = std::chrono::duration_cast<std::chrono::milliseconds>(endS - startS);
+        std::cout << "Tempo di esecuzione " << n << "-gramma di parole Sequenziale: " << durationS.count()
+                  << " millisecondi" << std::endl;
+        sum += static_cast<double>(durationS.count());
+        std::cout << "<<------------------------------>>" << std::endl;
+
+    }
+    mediaS = static_cast<double>(sum) / num_test;
+    return mediaS;
+}
+double averageCSequentialExecutions(int n, std::string path) {
+    //w.runWordNgrams("../clean_input.txt");
+    int num_test = 1;
+    double mediaS;
+    double sum;
+    CharacterNgrams c(n);
+    for(int i =0; i < num_test; i++) {
+        auto startS = std::chrono::steady_clock::now();
+
+        c.runCharacterNgrams(path);
+
+        auto endS = std::chrono::steady_clock::now();
+        auto durationS = std::chrono::duration_cast<std::chrono::milliseconds>(endS - startS);
+        std::cout << "Tempo di esecuzione "<<n<<"-gramma di caratteri Sequenziale: " << durationS.count() << " millisecondi" << std::endl;
+        std::cout << "<<------------------------------>>" << std::endl;
+        sum += static_cast<double>(durationS.count());
+    }
+    mediaS = static_cast<double>(sum) / num_test;
+    return mediaS;
+
+}
+double averageCParallelExecutions(int n, std::string path) {
+    //w.runWordNgrams("../clean_input.txt");
+    int num_test = 1;
+    double mediaP;
+    double sum;
+    CharacterNgrams c(n);
+    for(int i =0; i < num_test; i++) {
+        auto startP = std::chrono::steady_clock::now();
+
+        c.runCharacterNgrams_parallel(path);
+
+        auto endP = std::chrono::steady_clock::now();
+        auto durationP = std::chrono::duration_cast<std::chrono::milliseconds>(endP - startP);
+        std::cout << "Tempo di esecuzione "<<n<<"-gramma di caratteri Parallelo: " << durationP.count() << " millisecondi" << std::endl;
+        std::cout << "<<------------------------------>>" << std::endl;
+        sum += static_cast<double>(durationP.count());
+    }
+    mediaP = static_cast<double>(sum) / num_test;
+    return mediaP;
+
+}
+
+
+double averageWParallelExecutions(int n, std::string path) {
+    int num_test = 2;
+    double mediaP;
+    WordNgrams w(n);
+    double sum;
+    for (int i = 0; i < num_test; i++) {
+        auto startP = std::chrono::steady_clock::now();
+        w.runWordNgrams_parallel2(path);
+        auto endP = std::chrono::steady_clock::now();
+        auto durationP = std::chrono::duration_cast<std::chrono::milliseconds>(endP - startP);
+        std::cout << "Tempo di esecuzione " << n << "-gramma di parole Parallelo: " << durationP.count() << " millisecondi" << std::endl;
+        sum += static_cast<double>(durationP.count());
+        std::cout << "<<------------------------------>>" << std::endl;
+
+    }
+    mediaP = static_cast<double>(sum) / num_test;
+    return mediaP;
+}
 int main() {
-    std::ifstream inputFile("input.txt");
-    if (!inputFile.is_open() || !inputFile.good()) {
 
-        std::cout << "Impossibile aprire il file o l'input non e' valido." << std::endl;
-        exit(EXIT_FAILURE);
-
-    }
-
-    std::stringstream buffer;
-    buffer << inputFile.rdbuf();
-    std::string text = buffer.str();
-
-
-    std::map<std::string, int> trigramHistogram = computeTrigramHistogram(text);
-    std::cout << "\nTrigram Histogram:" << std::endl;
-    for (const auto& pair : trigramHistogram) {
-        std::cout << pair.first << ": " << pair.second << std::endl;
-    }
-
-
+    int n = 3; //n-gramma
     clean_txt();
-    WordNgrams w(3);
-    w.runWordNgrams("../clean_input.txt");
-    CharacterNgrams c(3);
-    c.runCharacterNgrams("../clean_input.txt");
+    /*
+    auto mediaS = averageWSequentialExecutions(n, "../clean_input.txt");
+
+    auto mediaP = averageWParallelExecutions(n, "../clean_input.txt");
+    std::cout << "Media esecuzione "<<n<<"-gramma parole Sequenziale : " << mediaS << std::endl;
+    std::cout << "Media esecuzione "<<n<<"-gramma parole Parallelo: " << mediaP << std::endl;
+
+    double speedup = static_cast<double>(mediaS) / static_cast<double>(mediaP);
+
+    std::cout << "Speedup: " << speedup << std::endl;
+     */
+    auto mediaS = averageCSequentialExecutions(n, "../clean_input.txt");
+    auto mediaP = averageCParallelExecutions(n, "../clean_input.txt");
+    std::cout << "Media esecuzione "<<n<<"-gramma parole Sequenziale : " << mediaS <<" millisecondi " <<std::endl;
+    std::cout << "Media esecuzione "<<n<<"-gramma parole Parallelo: " << mediaP <<" millisecondi " <<std::endl;
+    double speedup = static_cast<double>(mediaS) / static_cast<double>(mediaP);
+    std::cout << "Speedup: " << speedup << std::endl;
     return 0;
 }

@@ -20,7 +20,7 @@ public:
     void runWordNgrams(const string &filename);
 
     void runWordNgrams_parallel(const string &filename);
-
+    void runWordNgrams_parallel2(const string &filename);
     int getNgramLength() const;
 
 
